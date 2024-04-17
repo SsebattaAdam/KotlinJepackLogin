@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "17646957886",
+    "project_id": "couserwork",
+    "storage_bucket": "couserwork.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:17646957886:android:bbcb7e531faa7625d9686f",
+        "android_client_info": {
+          "package_name": "com.example.jetpack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArp8UBvbin33jbfPQpVISlm2DvadQ459E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
