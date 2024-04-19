@@ -1,5 +1,6 @@
 package com.example.jetpack.userUI.RoutingToPages
 
+import HomeScreen
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
@@ -7,8 +8,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.jetpack.userUI.HomeScreen
 import com.example.jetpack.userUI.LOGGIN.LogginScreen2
+
 import com.example.jetpack.userUI.LOGGIN.loginViewModel
 import com.example.jetpack.userUI.signIN.RegisterScreen2
 

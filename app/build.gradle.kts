@@ -52,6 +52,7 @@ android {
 }
 
 dependencies {
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation ("com.google.firebase:firebase-firestore-ktx:23.0.3")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
@@ -69,6 +70,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
 
 
     val navVersion = "2.7.7"

@@ -9,6 +9,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 class loginViewModel(
@@ -64,8 +67,6 @@ class loginViewModel(
     suspend fun createUser(context:Context){
         try {
             if(!validateSignUpForm()){
-//                loginUiState = loginUiState.copy(signupError = "Please fill in all fields")
-//                return
                 throw  IllegalArgumentException("Please fill in all fields")
             }
             loginUiState = loginUiState.copy(isLoading = true)
@@ -75,24 +76,28 @@ class loginViewModel(
 
             loginUiState = loginUiState.copy(signupError = null)
             repository.CreateUser(
+                loginUiState.firstName,
+                loginUiState.lastNameSignUp,
+                loginUiState.userNameSignUp,
                 loginUiState.userNameSignUp,
                 loginUiState.passwordSignUp
             ){ isSuccessfull ->
 
-                if (isSuccessfull ){
+                CoroutineScope(Dispatchers.Main).launch {
+                    if (isSuccessfull ){
+                        Toast.makeText(
+                            context, "Successs login",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-                    Toast.makeText(
-                        context, "Successs login",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    loginUiState = loginUiState.copy( isSuccesslogin = true)
-                } else{
-                    Toast.makeText(
-                        context, "Failed to login",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    loginUiState = loginUiState.copy( isSuccesslogin = false)
+                        loginUiState = loginUiState.copy( isSuccesslogin = true)
+                    } else{
+                        Toast.makeText(
+                            context, "Failed to login",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        loginUiState = loginUiState.copy( isSuccesslogin = false)
+                    }
                 }
             }
 

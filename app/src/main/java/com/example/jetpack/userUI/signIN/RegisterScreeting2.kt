@@ -86,7 +86,7 @@ fun RegisterScreen2(
                 },
                 label = {
                     Text(
-                        text = "First Name"
+                        text = "Name"
                     )
                 },
                 isError = isError
@@ -106,7 +106,7 @@ fun RegisterScreen2(
                 },
                 label = {
                     Text(
-                        text = "last Name"
+                        text = "Role"
                     )
                 },
                 isError = isError
@@ -203,21 +203,21 @@ fun RegisterScreen2(
                     .padding(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.Center,
             ) {
-               Row (
-                     horizontalArrangement = Arrangement.Center,
-                     verticalAlignment = Alignment.CenterVertically
-               ){
-                   Text(
-                       text = "Already have an Account"
-                   )
-                   Spacer(modifier = Modifier.size(8.dp))
-                   TextButton(onClick = {
-                       onNavToSignInPage.invoke()
-                   }) {
-                       Text("Login")
+                Row (
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ){
+                    Text(
+                        text = "Already have an Account"
+                    )
+                    Spacer(modifier = Modifier.size(8.dp))
+                    TextButton(onClick = {
+                        onNavToSignInPage.invoke()
+                    }) {
+                        Text("Login")
 
-                   }
-               }
+                    }
+                }
             }
 
 

@@ -19,13 +19,18 @@ class AuthRepository{
 
     private val db = Firebase.firestore
 
-    suspend fun addUserToFirestore(user: loginState, onComplete: (Boolean) -> Unit) = withContext(Dispatchers.IO) {
+    suspend fun addUserToFirestore(
+        firstName: String,
+        lastNameSignUp: String,
+        userName: String,
+        password: String,
+        onComplete: (Boolean) -> Unit
+    ) = withContext(Dispatchers.IO) {
         val userMap = hashMapOf(
-            "firstName" to user.firstName,
-            "lastNameSignUp" to user.lastNameSignUp,
-            "userName" to user.userName,
-            "password" to user.password,
-            "confirmPasswordSignUp" to user.confirmPasswordSignUp
+            "name" to firstName,
+            "role" to lastNameSignUp,
+            "email" to userName,
+            "password" to password
             // Add other user information here
         )
 
@@ -35,18 +40,28 @@ class AuthRepository{
             .addOnFailureListener { onComplete(false) }
     }
 
+
     suspend fun CreateUser(
+        firstName: String,
+        lastNameSignUp: String,
+        userName: String,
         email: String,
         password: String,
         onComplete: (Boolean) -> Unit
     ) = withContext(Dispatchers.IO){
-        Firebase.auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-            if (it.isSuccessful){
-                onComplete.invoke(true)
-        }else{
-                onComplete.invoke(false)
+        try {
+            Firebase.auth.createUserWithEmailAndPassword(email, password).await()
+            addUserToFirestore(
+                firstName,
+                lastNameSignUp,
+                userName,
+                password
+            ) { isSuccessful ->
+                onComplete.invoke(isSuccessful)
             }
-        }.await()
+        } catch (e: Exception) {
+            onComplete.invoke(false)
+        }
     }
 
     suspend fun loginUser2(
